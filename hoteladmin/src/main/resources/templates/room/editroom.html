@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="components :: header"/>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+
+    <ul th:replace="components :: sidebar"/>
+
+    <!-- Content Wrapper (content of the left side) -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <nav th:replace="components :: topbar"/>
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <legend>Sửa Thông Tin Phòng</legend>
+                    </div>
+                    <div class="card-body">
+                        <form class="form-horizontal" th:action="@{/room/edit}" th:object="${room}" method="post">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Tên Phòng</label>
+                                <div class="col-md-8">
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <input
+                                            class="form-control input-md"
+                                            required="required" type="text"
+                                            style="width: 400px !important;"
+                                            th:field="*{name}"
+                                    />
+                                    <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Loại Phòng</label>
+                                <div class="col-md-8">
+                                    <select th:field="*{roomType.id}" onChange="onstatechange(this)"
+                                            class="infobox">
+                                        <option value="0">Loại Phòng</option>
+                                        <option th:each="roomType : ${roomTypeList}" th:value="${roomType.id}"
+                                                th:text="${roomType.name}"></option>
+                                    </select></div>
+                                <span th:if="${#fields.hasErrors('roomType')}" th:errors="*{roomType}"></span>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">SIZE Phòng</label>
+                                <div class="col-md-8">
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <input
+                                            class="form-control input-md"
+                                            required="required" type="text"
+                                            style="width: 400px !important;"
+
+                                            th:field="*{size}"
+                                    />
+                                    <span class="text-danger" th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Số Phòng Ngủ</label>
+                                <div class="col-md-8">
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <input
+                                            class="form-control input-md"
+                                            required="required" type="number"
+                                            style="width: 400px !important;"
+
+                                            th:field="*{bed}"
+                                    />
+                                    <span class="text-danger" th:if="${#fields.hasErrors('bed')}" th:errors="*{bed}"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Giá Phòng</label>
+                                <div class="col-md-8">
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <input
+                                            class="form-control input-md"
+                                            required="required" type="text"
+                                            style="width: 400px !important;"
+
+                                            th:field="*{price}"
+                                    />
+                                    <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="center-block">
+                                <input id="singlebutton" name="singlebutton"
+                                       style="margin-left: 34%;"
+                                       class="btn btn-success" type="submit" value="Lưu"/>
+                                <a class="btn btn-primary" th:href="@{/room/all}" role="button">Trở lại</a>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+
+</div>
+<!-- End of Page Wrapper -->
+<div th:replace="components :: utilities"/>
+</body>
+
+
+</html>
